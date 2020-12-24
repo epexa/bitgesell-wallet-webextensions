@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 	"name": "Bitgesell Wallet",
 	"short_name": "BGL Wallet",
-	"version": "0.9.1",
-	"description": "Cross-platform wallet for BGL cryptocurrency!",
+	"version": "0.9.2",
+	"description": "Cross-platform wallet for BGL cryptocurrency.",
 	"icons": {
 		"192": "icon-192.png"
 	},
