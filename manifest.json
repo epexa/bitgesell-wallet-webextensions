@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Bitgesell Wallet",
 	"short_name": "BGL Wallet",
-	"version": "0.9.6",
+	"version": "0.9.7.1",
 	"description": "Cross-platform wallet for BGL cryptocurrency.",
 	"icons": {
 		"192": "icon-192.png"
@@ -17,7 +17,7 @@
 	"browser_action": {
 		"default_icon": "icon-192.png"
 	},
-	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+	"content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com; object-src 'self'",
 	"permissions": [
 		"https://*/",
 		"http://*/"
