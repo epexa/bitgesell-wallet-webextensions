@@ -1,25 +1,21 @@
 ﻿{
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Bitgesell Wallet",
 	"short_name": "BGL Wallet",
-	"version": "0.9.7.1",
+	"version": "0.9.8",
 	"description": "Cross-platform wallet for BGL cryptocurrency.",
 	"icons": {
 		"192": "icon-192.png"
 	},
 	"homepage_url": "https://bglwallet.io",
 	"background": {
-		"scripts": [
-			"background.js"
-		]
+		"service_worker": "background.js"
 	},
 	"author": "Epexa entusoft@gmail.com",
-	"browser_action": {
+	"action": {
 		"default_icon": "icon-192.png"
 	},
-	"content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com; object-src 'self'",
-	"permissions": [
-		"https://*/",
-		"http://*/"
+	"host_permissions": [
+		"*://*/*"
 	]
 }

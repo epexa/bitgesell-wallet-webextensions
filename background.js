@@ -1,4 +1,4 @@
-chrome.browserAction.onClicked.addListener(() => {
+chrome.action.onClicked.addListener(() => {
 	// chrome.tabs.create({ url: 'index.html' });
 	chrome.windows.create({
 		type: 'popup',
