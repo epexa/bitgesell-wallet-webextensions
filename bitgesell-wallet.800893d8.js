@@ -22994,7 +22994,7 @@ const getCoinInfo = (callback)=>{
 };
 
 },{"./twa":"lrhWl","./utils":"khuqI","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"c3hj5":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"name\":\"bitgesell-wallet\",\"version\":\"0.9.8\",\"description\":\"Bitgesell Wallet JS\",\"homepage\":\"https://app.bglwallet.io\",\"bugs\":\"https://github.com/epexa/bitgesell-wallet/issues\",\"license\":\"Proprietary\",\"author\":\"epexa\",\"type\":\"module\",\"repository\":\"epexa/bitgesell-wallet\",\"config\":{\"IP\":\"127.0.0.1\",\"PORT\":\"8080\",\"DIST_FOLDER\":\"../bitgesell-wallet-dist\"},\"scripts\":{\"prepare\":\"husky\",\"eslint\":\"eslint 'src/**/*.js' --ignore-pattern 'src/assets/**'\",\"start\":\"npm run eslint && IP=$npm_package_config_IP PORT=$npm_package_config_PORT node dev\",\"build\":\"npm run eslint && node build $npm_package_config_DIST_FOLDER\",\"build-webextension\":\"npm run eslint && node build ../bitgesell-wallet-webextensions\",\"dist-start\":\"serve $npm_package_config_DIST_FOLDER -l tcp://$npm_package_config_IP:$npm_package_config_PORT\",\"ngrok\":\"ngrok http $npm_package_config_PORT\"},\"targets\":{\"default\":{}},\"browser\":{\"buffer\":false},\"parcel\":{\"minify\":false},\"alias\":{\"dayjs\":\"dayjs/esm/index.js\"},\"devDependencies\":{\"chokidar\":\"^4.0.3\",\"eslint\":\"^9.21.0\",\"eslint-config-google\":\"^0.14.0\",\"husky\":\"^9.1.7\",\"parcel\":\"^2.14.1\",\"serve\":\"^14.2.4\",\"svgo\":\"^3.3.2\"},\"dependencies\":{\"@bitcoinerlab/secp256k1\":\"^1.2.0\",\"@fortawesome/fontawesome-free\":\"^6.7.2\",\"aes4js\":\"^1.0.0\",\"bip32\":\"^5.0.0-rc.0\",\"bip39\":\"^3.1.0\",\"bitcoinjs-lib\":\"^6.1.7\",\"bitgesell-bitcoinjs\":\"^1.0.5\",\"bootstrap\":\"^5.3.3\",\"buffer\":\"^6.0.3\",\"datatables.net-bs5\":\"^2.2.2\",\"datatables.net-responsive-bs5\":\"^3.0.4\",\"dayjs\":\"^1.11.13\",\"ecpair\":\"^3.0.0\",\"satoshi-bitcoin\":\"^1.0.5\",\"sweetalert2\":\"^11.17.2\"}}");
+module.exports = JSON.parse("{\"name\":\"bitgesell-wallet\",\"version\":\"0.9.8.1\",\"description\":\"Bitgesell Wallet JS\",\"homepage\":\"https://app.bglwallet.io\",\"bugs\":\"https://github.com/epexa/bitgesell-wallet/issues\",\"license\":\"Proprietary\",\"author\":\"epexa\",\"type\":\"module\",\"repository\":\"epexa/bitgesell-wallet\",\"config\":{\"IP\":\"127.0.0.1\",\"PORT\":\"8080\",\"DIST_FOLDER\":\"../bitgesell-wallet-dist\"},\"scripts\":{\"prepare\":\"husky\",\"eslint\":\"eslint 'src/**/*.js' --ignore-pattern 'src/assets/**'\",\"start\":\"npm run eslint && IP=$npm_package_config_IP PORT=$npm_package_config_PORT node dev\",\"build\":\"npm run eslint && node build $npm_package_config_DIST_FOLDER\",\"build-webextension\":\"npm run eslint && node build ../bitgesell-wallet-webextensions\",\"dist-start\":\"serve $npm_package_config_DIST_FOLDER -l tcp://$npm_package_config_IP:$npm_package_config_PORT\",\"ngrok\":\"ngrok http $npm_package_config_PORT\"},\"targets\":{\"default\":{}},\"alias\":{\"dayjs\":\"dayjs/esm/index.js\"},\"devDependencies\":{\"chokidar\":\"^4.0.3\",\"eslint\":\"^9.21.0\",\"eslint-config-google\":\"^0.14.0\",\"husky\":\"^9.1.7\",\"parcel\":\"^2.14.1\",\"serve\":\"^14.2.4\",\"svgo\":\"^3.3.2\"},\"dependencies\":{\"@bitcoinerlab/secp256k1\":\"^1.2.0\",\"@fortawesome/fontawesome-free\":\"^6.7.2\",\"aes4js\":\"^1.0.0\",\"bip32\":\"^5.0.0-rc.0\",\"bip39\":\"^3.1.0\",\"bitcoinjs-lib\":\"^6.1.7\",\"bitgesell-bitcoinjs\":\"^1.0.5\",\"bootstrap\":\"^5.3.3\",\"buffer\":\"^6.0.3\",\"datatables.net-bs5\":\"^2.2.2\",\"datatables.net-responsive-bs5\":\"^3.0.4\",\"dayjs\":\"^1.11.13\",\"ecpair\":\"^3.0.0\",\"satoshi-bitcoin\":\"^1.0.5\",\"sweetalert2\":\"^11.17.2\"}}");
 
 },{}],"9Jiy6":[function() {},{}],"aL5fK":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -23204,7 +23204,7 @@ window.navigateMyAddresses = ()=>{
     window.myAddressesTableDraw();
 };
 
-},{"ecpair":"2gbSb","@bitcoinerlab/secp256k1":"13Dgd","bitcoinjs-lib":"5LQXv","buffer":"eoH60","bootstrap":"hjCRY","datatables.net-bs5":"lHQHJ","datatables.net-responsive-bs5":"cZZnk","datatables.net-bs5/css/dataTables.bootstrap5.min.css":"7aM46","datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css":"4ju6B","../utils":"khuqI","../app":"2R06K","../api":"38UJz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"2gbSb":[function(require,module,exports,__globalThis) {
+},{"ecpair":"2gbSb","@bitcoinerlab/secp256k1":"13Dgd","bitcoinjs-lib":"5LQXv","buffer":"bCaf4","bootstrap":"hjCRY","datatables.net-bs5":"lHQHJ","datatables.net-responsive-bs5":"cZZnk","datatables.net-bs5/css/dataTables.bootstrap5.min.css":"7aM46","datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css":"4ju6B","../utils":"khuqI","../app":"2R06K","../api":"38UJz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"2gbSb":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _ecpairJs.ECPairFactory));
@@ -32195,10 +32195,7 @@ function isogenyMap(field, map) {
     };
 }
 
-},{"eccb35e649679ca":"1jGup","202487820f28c009":"fc0Wi"}],"eoH60":[function(require,module,exports,__globalThis) {
-"use strict";
-
-},{}],"lHQHJ":[function(require,module,exports,__globalThis) {
+},{"eccb35e649679ca":"1jGup","202487820f28c009":"fc0Wi"}],"lHQHJ":[function(require,module,exports,__globalThis) {
 /*! DataTables Bootstrap 5 integration
  * © SpryMedia Ltd - datatables.net/license
  */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -49471,7 +49468,7 @@ window.navigateCreateWallet = ()=>{
     });
 };
 
-},{"../utils":"khuqI","../app":"2R06K","bip39":"iyDG0","bitcoinjs-lib":"5LQXv","bip32":"6lR9p","@bitcoinerlab/secp256k1":"13Dgd","buffer":"eoH60","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"iyDG0":[function(require,module,exports,__globalThis) {
+},{"../utils":"khuqI","../app":"2R06K","bip39":"iyDG0","bitcoinjs-lib":"5LQXv","bip32":"6lR9p","@bitcoinerlab/secp256k1":"13Dgd","buffer":"bCaf4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"iyDG0":[function(require,module,exports,__globalThis) {
 var Buffer = require("ad6c208ed534fe78").Buffer;
 "use strict";
 Object.defineProperty(exports, "__esModule", {
@@ -51297,4 +51294,4 @@ window.navigateLogin = ()=>{
 
 },{"aes4js":"feHmG","../utils":"khuqI","../app":"2R06K","../twa":"lrhWl","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["a0t4e"], "a0t4e", "parcelRequiredbf4", {})
 
-//# sourceMappingURL=bitgesell-wallet.bc3c8504.js.map
+//# sourceMappingURL=bitgesell-wallet.800893d8.js.map
