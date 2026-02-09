@@ -1885,4 +1885,4 @@
     WebView.postEvent('web_app_request_viewport');
 })();
 
-//# sourceMappingURL=bitgesell-wallet.b0c5bedc.js.map
+//# sourceMappingURL=bitgesell-wallet.f8233ce0.js.map

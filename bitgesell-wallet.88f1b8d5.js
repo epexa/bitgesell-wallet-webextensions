@@ -714,7 +714,12 @@
         var t = n(36), o = n.n(t), i = n(1);
         !function() {
             var e;
-            e = window.jQuery, s();
+            /* if (void 0 === window.jQuery || "1.11.1" !== window.jQuery.fn.jquery) {
+                var a = document.createElement("script");
+                a.setAttribute("type", "text/javascript"), a.setAttribute("src", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"), a.readyState ? a.onreadystatechange = function() {
+                    "complete" != this.readyState && "loaded" != this.readyState || n();
+                } : a.onload = n, (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(a);
+            } else */ e = window.jQuery, s();
             function n() {
                 e = window.jQuery.noConflict(!0), s();
             }
@@ -863,4 +868,4 @@
     }
 });
 
-//# sourceMappingURL=bitgesell-wallet.5bf15321.js.map
+//# sourceMappingURL=bitgesell-wallet.88f1b8d5.js.map

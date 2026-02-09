@@ -1,9 +1,19 @@
 <!doctype html>
 <html lang="en">
-	<head><link rel="stylesheet" href="/bitgesell-wallet.c0f97a6e.css">
+	<head><link rel="stylesheet" href="/bitgesell-wallet.5c5eb3fd.css">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
-		<link rel="stylesheet" href="/bitgesell-wallet.f654ec85.css" id="theme">
+		<link rel="stylesheet" href="/bitgesell-wallet.6bfc881b.css" id="theme">
+
+		<link rel="shortcut icon" href="/favicon.add454de.ico">
+		<meta name="description" content="Discover the best open source, secure, cross-platform Bitgesell DApps — Wallet, Bridge, Explorer, SDK and more for power users and devs!">
+		<meta name="author" content="Bitgesell.App">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="1200">
+		<meta property="og:title" content="BGL Wallet">
+		<meta property="og:description" content="Best open source, secure, cross-platform Bitgesell DApps — Wallet, Bridge, Explorer, SDK and more for power users and devs!">
+		<meta property="og:image" content="/assets/og-image.jpg">
+		<meta property="og:url" content="https://app.bglwallet.io">
 
 		<title>Bitgesell Wallet</title>
 	</head>
@@ -18,6 +28,7 @@
 						<ul class="navbar-nav text-uppercase gap-5" id="menu-items">
 							<li class="nav-item mx-sm-0 mx-xl-2 mx-xxl-5"><a class="nav-link fs-5 fw-bold" href="#my-addresses">My addresses</a></li>
 							<li class="nav-item mx-sm-0 mx-xl-2 mx-xxl-5"><a class="nav-link fs-5 fw-bold" href="#send">Send</a></li>
+							<li class="nav-item mx-sm-0 mx-xl-2 mx-xxl-5"><a class="nav-link fs-5 fw-bold" target="_blank" href="https://faucet.bitgesell.app">Faucet</a></li>
 							<!-- <li class="nav-item mx-sm-0 mx-xl-2 mx-xxl-5"><a class="nav-link fs-5 fw-bold" href="https://bglswap.com" target="_blank">Swap</a></li> -->
 						</ul>
 						<form class="mb-0">
@@ -55,11 +66,11 @@
 						<div class="modal-body">
 							<form id="node-address">
 								<div class="input-group">
-									<input class="form-control" name="node-address" type="url" placeholder="http://[USERNAME]:[PASSWORD]@[IP]:[PORT]" required="" value="https://rpc.bglwallet.io">
+									<input class="form-control" name="node-address" type="url" placeholder="http://[USERNAME]:[PASSWORD]@[IP]:[PORT]" required="" value="https://rpc.bitgesell.app">
 									<button class="btn btn-success" type="submit">Change</button>
 								</div>
 							</form>
-							<small class="form-text text-muted">Alternative RPC node: <kbd>https://rpc2.bglwallet.io</kbd></small>
+							<small class="form-text text-muted">Alternative RPC node: <kbd>https://rpc2.bitgesell.app</kbd></small>
 						</div>
 					</div>
 				</div>
@@ -127,7 +138,7 @@
 			<a class="btn btn-success" href="#new-address">Add new address</a>
 		</div>
 		<div class="col d-flex justify-content-end">
-			<button class="btn btn-info float-right" id="import-address-btn">Import address</button>
+			<button class="btn btn-outline-info float-right" id="import-address-btn">Import address</button>
 		</div>
 	</div>
 
@@ -249,6 +260,11 @@
 				<label for="send-amount-val">Fee:</label>
 				<input type="number" class="form-control form-control-lg" id="send-fee-val" name="fee" required="" placeholder="0.00010000" value="0.00010000" min="0.00000001" step="0.00000001">
 			</div>
+			<div class="form-group d-grid">
+				<label for="send-op-return">Public comment (optional): <span role="button" tabindex="0" class="text-info float-end" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="click" data-bs-html="true" title="⚠️ This text is <b>unencrypted</b> and sent in plain text. It will be <b>permanently stored on blockchain</b>, and <u><b>anyone can read it!</b></u><br><a target='_blank' href='https://learnmeabitcoin.com/technical/script/return/'>Read more</a>"><i class="fa-solid fa-circle-question"></i></span></label>
+				<input type="text" class="form-control form-control-lg" id="send-op-return" name="op-return" placeholder="Visible to everyone">
+				<div class="invalid-feedback">Length exceeded</div>
+			</div>
 			<button type="submit" class="btn btn-success btn-lg" id="send-form-btn">Send BGL</button>
 			<small class="form-text text-info h6 d-none" id="send-new-balance">
 				Balance after sending: <span class="badge bg-info"></span> BGL
@@ -307,6 +323,9 @@
 					<li class="nav-item" role="presentation">
 						<a class="nav-link bg-transparent d-flex flex-column justify-content-center align-items-center gap-1 fs-6 pt-3 pb-3" type="button" role="tab" href="#send"><i class="fa-solid fa-paper-plane"></i>Send</a>
 					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link bg-transparent d-flex flex-column justify-content-center align-items-center gap-1 fs-6 pt-3 pb-3" type="button" role="tab" target="_blank" href="https://faucet.bitgesell.app"><i class="fa-solid fa-faucet"></i>Faucet</a>
+					</li>
 					<!-- <li class="nav-item" role="presentation">
 						<a class="nav-link bg-transparent d-flex flex-column justify-content-center align-items-center gap-1 fs-6 pt-3 pb-3" type="button" role="tab" href="https://bglswap.com" target="_blank"><i class="fa-solid fa-rotate"></i>Swap</a>
 					</li> -->
@@ -318,11 +337,11 @@
 
 		</div>
 
+		<script src="/bitgesell-wallet.88f1b8d5.js"></script>
+		<script src="/bitgesell-wallet.f8233ce0.js"></script>
+		<script src="/bitgesell-wallet.9b8e15d1.js"></script>
 		<script src="/jquery-3.7.1.min.js"></script>
-		<script src="/bitgesell-wallet.5bf15321.js"></script>
-		<script src="/bitgesell-wallet.b0c5bedc.js"></script>
-		<script src="/bitgesell-wallet.90823f07.js"></script>
-		<script type="module" src="/bitgesell-wallet.800893d8.js"></script>
+		<script type="module" src="/bitgesell-wallet.200f3e5d.js"></script>
 	</body>
 </html>
 <div class="d-none" id="welcome">
@@ -381,11 +400,17 @@
 		<form class="d-grid gap-3">
 			<div class="form-group">
 				<label for="signup-password">Type your password:</label>
-				<input type="password" class="form-control form-control-lg" id="signup-password" name="signup_password" required="" autocomplete="new-password">
+				<div class="input-group">
+					<input type="password" class="form-control form-control-lg" id="signup-password" name="signup_password" required="" autocomplete="new-password">
+					<button class="btn btn-outline-info toggle-password" type="button"><i class="fas fa-eye"></i></button>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="retype-signup-password">Re-type your password:</label>
-				<input type="password" class="form-control form-control-lg" id="retype-signup-password" name="retype_signup_password" required="">
+				<div class="input-group">
+					<input type="password" class="form-control form-control-lg" id="retype-signup-password" name="retype_signup_password" required="">
+					<button class="btn btn-outline-info toggle-password" type="button"><i class="fas fa-eye"></i></button>
+				</div>
 			</div>
 			<button type="submit" class="btn btn-success btn-lg">Create local password</button>
 		</form>
@@ -420,7 +445,10 @@
 		<form class="d-grid gap-3">
 			<div class="form-group">
 				<label for="login-password">Your wallet local password (not seed words):</label>
-				<input type="password" class="form-control form-control-lg" id="login-password" name="password" required="" autocomplete="current-password">
+				<div class="input-group">
+					<input type="password" class="form-control form-control-lg" id="login-password" name="password" required="" autocomplete="current-password">
+					<button class="btn btn-outline-info toggle-password" type="button"><i class="fas fa-eye"></i></button>
+				</div>
 			</div>
 			<button type="submit" class="btn btn-success btn-lg">Open your Bitgesell Wallet</button>
 		</form>

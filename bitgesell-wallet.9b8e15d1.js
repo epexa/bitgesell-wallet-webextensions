@@ -2572,4 +2572,4 @@
 	 */ QRCode.CorrectLevel = QRErrorCorrectLevel;
 })();
 
-//# sourceMappingURL=bitgesell-wallet.90823f07.js.map
+//# sourceMappingURL=bitgesell-wallet.9b8e15d1.js.map

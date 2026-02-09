@@ -4692,8 +4692,11 @@ const hideDataTablePagingIfOnlyOnePage = (oSettings)=>{
 // document.oncontextmenu = new Function('return false;');
 window.qrCodeModal = new _bootstrap.Modal('#qr-code-modal');
 const $nodeAddressInput = $dom.nodeAddress.querySelector('.form-control[name="node-address"]');
-if (window.localStorage.nodeAddress) $nodeAddressInput.value = window.localStorage.nodeAddress;
-else window.localStorage.nodeAddress = $nodeAddressInput.value;
+if (window.localStorage.nodeAddress) {
+    if (window.localStorage.nodeAddress === 'https://rpc.bglwallet.io') window.localStorage.nodeAddress = 'https://rpc.bitgesell.app';
+    if (window.localStorage.nodeAddress === 'https://rpc2.bglwallet.io') window.localStorage.nodeAddress = 'https://rpc2.bitgesell.app';
+    $nodeAddressInput.value = window.localStorage.nodeAddress;
+} else window.localStorage.nodeAddress = $nodeAddressInput.value;
 const nodeAddressModal = new _bootstrap.Modal($dom.nodeAddressModal);
 document.querySelectorAll('.node-address-btn').forEach(($btn)=>{
     $btn.addEventListener('click', ()=>{
@@ -4824,6 +4827,29 @@ document.querySelectorAll('.current-year').forEach(($currentYear)=>{
 document.querySelectorAll('.version').forEach(($version)=>{
     $version.innerText = version;
 });
+document.querySelectorAll('.toggle-password').forEach(($btn)=>{
+    $btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const $input = $btn.closest('.input-group').querySelector('input');
+        if ($input.getAttribute('type') === 'password') {
+            $input.setAttribute('type', 'text');
+            $btn.querySelector('i').classList.remove('fa-eye');
+            $btn.querySelector('i').classList.add('fa-eye-slash');
+        } else {
+            $input.setAttribute('type', 'password');
+            $btn.querySelector('i').classList.remove('fa-eye-slash');
+            $btn.querySelector('i').classList.add('fa-eye');
+        }
+    });
+});
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+tooltipTriggerList.forEach((tooltipTriggerEl)=>new _bootstrap.Tooltip(tooltipTriggerEl));
+document.addEventListener('click', (e)=>{
+    tooltipTriggerList.forEach((el)=>{
+        const tooltipInstance = _bootstrap.Tooltip.getInstance(el);
+        if (tooltipInstance && tooltipInstance._isShown() && !el.contains(e.target)) tooltipInstance.hide();
+    });
+});
 window.navigateMobileMenu = ()=>{
     (0, _utils.hide)($dom.dashboard, $dom.myAddresses, $dom.send, $dom.setPassword, $dom.welcome, $dom.newAddress, $dom.transactions, $dom.createWallet, $dom.exportWallet);
     (0, _utils.show)($dom.main, $dom.mobileMenu);
@@ -4879,7 +4905,8 @@ var _bitgesellNetworks = require("bitgesell-networks");
 var Buffer = require("21df2c7833acad1a").Buffer;
 const toLE = (number, size = 4)=>{
     const buf = Buffer.alloc(size);
-    buf.writeUInt32LE(number, 0);
+    if (size === 8) buf.writeBigUInt64LE(BigInt(number), 0);
+    else buf.writeUInt32LE(number, 0);
     return buf;
 };
 const getPreimage = ({ version, vIn, vOut, locktime, inputIdx, scriptCode, value, sighashType })=>{
@@ -22884,7 +22911,7 @@ var _twa = require("./twa");
 var _utils = require("./utils");
 const explorerApi = 'https://api.bitaps.com/bgl/v1/blockchain';
 const fetchQuery = (url, callback, fetchParams = null, errorFunc = null, callbackAlways = null)=>{
-    window.fetch(url, fetchParams).then((response)=>{
+    return window.fetch(url, fetchParams).then((response)=>{
         return response.json();
     }).then((responseJson)=>{
         // console.log(responseJson);
@@ -22957,13 +22984,26 @@ const getAddressUnconfirmedInfo = (address, callback)=>{
 		};
 	});
 }; */ const getAddressesBalance = (addresses, callback)=>{
-    const url = `${explorerApi}/addresses/state/by/address?list=${addresses.join(',')}`;
-    fetchQuery(url, (responseJson)=>{
-        callback(responseJson.data);
-    }, null, ()=>{
-        return {
-            title: `Error in get addresses balance query: <a target="_blank" href="${url}">${url}</a>`
-        };
+    const chunks = [];
+    const chunkSize = 50;
+    if (addresses.length === 0) {
+        callback({});
+        return;
+    }
+    for(let i = 0; i < addresses.length; i += chunkSize)chunks.push(addresses.slice(i, i + chunkSize));
+    const result = {};
+    const promises = chunks.map((chunk)=>{
+        const url = `${explorerApi}/addresses/state/by/address?list=${chunk.join(',')}`;
+        return fetchQuery(url, (responseJson)=>{
+            if (responseJson && responseJson.data) Object.assign(result, responseJson.data);
+        }, null, ()=>{
+            return {
+                title: `Error in get addresses balance query: <a target="_blank" href="${url}">${url}</a>`
+            };
+        });
+    });
+    Promise.all(promises).then(()=>{
+        callback(result);
     });
 };
 const getAddressUtxo = (address, callback)=>{
@@ -22994,7 +23034,7 @@ const getCoinInfo = (callback)=>{
 };
 
 },{"./twa":"lrhWl","./utils":"khuqI","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"c3hj5":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"name\":\"bitgesell-wallet\",\"version\":\"0.9.8.1\",\"description\":\"Bitgesell Wallet JS\",\"homepage\":\"https://app.bglwallet.io\",\"bugs\":\"https://github.com/epexa/bitgesell-wallet/issues\",\"license\":\"Proprietary\",\"author\":\"epexa\",\"type\":\"module\",\"repository\":\"epexa/bitgesell-wallet\",\"config\":{\"IP\":\"127.0.0.1\",\"PORT\":\"8080\",\"DIST_FOLDER\":\"../bitgesell-wallet-dist\"},\"scripts\":{\"prepare\":\"husky\",\"eslint\":\"eslint 'src/**/*.js' --ignore-pattern 'src/assets/**'\",\"start\":\"npm run eslint && IP=$npm_package_config_IP PORT=$npm_package_config_PORT node dev\",\"build\":\"npm run eslint && node build $npm_package_config_DIST_FOLDER\",\"build-webextension\":\"npm run eslint && node build ../bitgesell-wallet-webextensions\",\"dist-start\":\"serve $npm_package_config_DIST_FOLDER -l tcp://$npm_package_config_IP:$npm_package_config_PORT\",\"ngrok\":\"ngrok http $npm_package_config_PORT\"},\"targets\":{\"default\":{}},\"alias\":{\"dayjs\":\"dayjs/esm/index.js\"},\"devDependencies\":{\"chokidar\":\"^4.0.3\",\"eslint\":\"^9.21.0\",\"eslint-config-google\":\"^0.14.0\",\"husky\":\"^9.1.7\",\"parcel\":\"^2.14.1\",\"serve\":\"^14.2.4\",\"svgo\":\"^3.3.2\"},\"dependencies\":{\"@bitcoinerlab/secp256k1\":\"^1.2.0\",\"@fortawesome/fontawesome-free\":\"^6.7.2\",\"aes4js\":\"^1.0.0\",\"bip32\":\"^5.0.0-rc.0\",\"bip39\":\"^3.1.0\",\"bitcoinjs-lib\":\"^6.1.7\",\"bitgesell-bitcoinjs\":\"^1.0.5\",\"bootstrap\":\"^5.3.3\",\"buffer\":\"^6.0.3\",\"datatables.net-bs5\":\"^2.2.2\",\"datatables.net-responsive-bs5\":\"^3.0.4\",\"dayjs\":\"^1.11.13\",\"ecpair\":\"^3.0.0\",\"satoshi-bitcoin\":\"^1.0.5\",\"sweetalert2\":\"^11.17.2\"}}");
+module.exports = JSON.parse("{\"name\":\"bitgesell-wallet\",\"version\":\"0.9.9\",\"description\":\"Bitgesell Wallet JS\",\"homepage\":\"https://app.bglwallet.io\",\"bugs\":\"https://github.com/epexa/bitgesell-wallet/issues\",\"license\":\"Proprietary\",\"author\":\"epexa\",\"type\":\"module\",\"repository\":\"epexa/bitgesell-wallet\",\"config\":{\"IP\":\"127.0.0.1\",\"PORT\":\"8080\",\"DIST_FOLDER\":\"../bitgesell-wallet-dist\"},\"scripts\":{\"prepare\":\"husky\",\"eslint\":\"eslint 'src/**/*.js' --ignore-pattern 'src/assets/**'\",\"start\":\"npm run eslint && IP=$npm_package_config_IP PORT=$npm_package_config_PORT node dev\",\"build\":\"npm run eslint && node build $npm_package_config_DIST_FOLDER\",\"build-webextension\":\"npm run eslint && node build ../bitgesell-wallet-webextensions\",\"dist-start\":\"serve $npm_package_config_DIST_FOLDER -l tcp://$npm_package_config_IP:$npm_package_config_PORT\",\"ngrok\":\"ngrok http $npm_package_config_PORT\"},\"targets\":{\"default\":{}},\"alias\":{\"dayjs\":\"dayjs/esm/index.js\"},\"devDependencies\":{\"chokidar\":\"^4.0.3\",\"eslint\":\"^9.21.0\",\"eslint-config-google\":\"^0.14.0\",\"husky\":\"^9.1.7\",\"parcel\":\"^2.14.1\",\"serve\":\"^14.2.4\",\"svgo\":\"^3.3.2\"},\"dependencies\":{\"@bitcoinerlab/secp256k1\":\"^1.2.0\",\"@fortawesome/fontawesome-free\":\"^6.7.2\",\"aes4js\":\"^1.0.0\",\"bip32\":\"^5.0.0-rc.0\",\"bip39\":\"^3.1.0\",\"bitcoinjs-lib\":\"^6.1.7\",\"bitgesell-bitcoinjs\":\"^1.0.6\",\"bootstrap\":\"^5.3.3\",\"buffer\":\"^6.0.3\",\"datatables.net-bs5\":\"^2.2.2\",\"datatables.net-responsive-bs5\":\"^3.0.4\",\"dayjs\":\"^1.11.13\",\"ecpair\":\"^3.0.0\",\"satoshi-bitcoin\":\"^1.0.5\",\"sweetalert2\":\"^11.17.2\"}}");
 
 },{}],"9Jiy6":[function() {},{}],"aL5fK":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -23048,7 +23088,7 @@ window.addEventButtons = (oSettings)=>{
     });
     (0, _app.hideDataTablePagingIfOnlyOnePage)(oSettings);
 };
-const optionsButtonHtml = (address)=>`<a class="btn btn-danger btn-sm" href="#send/${address}"><i class="fa-solid fa-paper-plane visible-sr"></i><span class="hidden-sr">Send</span></a>` + `<button class="btn btn-info btn-sm qr-code-btn" data-address="${address}"><i class="fa-solid fa-download visible-sr"></i><span class="hidden-sr">Receive</span></button>` + `<a class="btn btn-warning btn-sm" target="_blank" href="https://bgl.bitaps.com/${address}"><i class="fa-solid fa-binoculars visible-sr"></i><span class="hidden-sr">Explorer</span></a>` + `<a class="btn btn-success btn-sm" href="#transactions/${address}"><i class="fa-solid fa-circle-nodes visible-sr"></i><span class="hidden-sr">Transactions</span></a>`;
+const optionsButtonHtml = (address)=>`<a class="btn btn-outline-success btn-sm" href="#send/${address}"><i class="fa-solid fa-paper-plane visible-sr"></i><span class="hidden-sr">Send</span></a>` + `<button class="btn btn-outline-info btn-sm qr-code-btn" data-address="${address}"><i class="fa-solid fa-download visible-sr"></i><span class="hidden-sr">Receive</span></button>` + `<a class="btn btn-outline-primary btn-sm" href="#transactions/${address}"><i class="fa-solid fa-circle-nodes visible-sr"></i><span class="hidden-sr">Transactions</span></a>` + `<a class="btn btn-outline-secondary btn-sm" target="_blank" href="https://bgl.bitaps.com/${address}"><i class="fa-solid fa-binoculars visible-sr"></i><span class="hidden-sr">Explorer</span></a>`;
 window.myAddressesTable = new (0, _datatablesNetBs5Default.default)($dom.myAddressesTable, Object.assign({}, (0, _utils.dataTableParams), {
     columnDefs: [
         {
@@ -50704,6 +50744,7 @@ var _ecpairDefault = parcelHelpers.interopDefault(_ecpair);
 var _secp256K1 = require("@bitcoinerlab/secp256k1");
 var _satoshiBitcoin = require("satoshi-bitcoin");
 var _satoshiBitcoinDefault = parcelHelpers.interopDefault(_satoshiBitcoin);
+var _buffer = require("buffer");
 var _utils = require("../utils");
 var _app = require("../app");
 var _api = require("../api");
@@ -50722,9 +50763,10 @@ let newTx;
 const generateTransaction = ()=>{
     const fromPublicAddress = $dom.sendFromVal.value;
     const toPublicAddress = $dom.sendToVal.value;
+    const opReturn = $dom.sendOpReturn.value;
     const privateKey = window.storage.addresses[fromPublicAddress].private;
     const keyPair = ECPair.fromWIF(privateKey, (0, _app.NETWORK));
-    // console.log('send tx', privateKey, fromPublicAddress, toPublicAddress, sendParams.fromAmount, sendParams.toAmount, sendParams.feeAmount, sendParams.newFromAmount);
+    // console.log('send tx', privateKey, fromPublicAddress, toPublicAddress, sendParams.fromAmount, sendParams.toAmount, sendParams.feeAmount, sendParams.newFromAmount, opReturn);
     const tx = new (0, _bitcoinjsLib.Psbt)({
         network: (0, _app.NETWORK)
     });
@@ -50745,6 +50787,17 @@ const generateTransaction = ()=>{
         value: sendParams.newFromAmount,
         address: fromPublicAddress
     });
+    if (opReturn) {
+        const dataBuffer = (0, _buffer.Buffer).from(opReturn, 'utf8');
+        const embedScript = (0, _bitcoinjsLib.script).compile([
+            (0, _bitcoinjsLib.opcodes).OP_RETURN,
+            dataBuffer
+        ]);
+        tx.addOutput({
+            value: 0,
+            script: embedScript
+        });
+    }
     for(let i = 0; i < apiAddressUtxo.length; i++)tx.signInput(i, keyPair);
     tx.finalizeAllInputs();
     newTx = tx.extractTransaction().toHex();
@@ -50915,13 +50968,27 @@ $dom.sendAmountMax.addEventListener('click', ()=>{
     $dom.sendAmountVal.value = (0, _satoshiBitcoinDefault.default).toBitcoin(sendParams.fromAmount - sendParams.feeAmount);
     calcAmountSpent();
 });
+$dom.sendOpReturn.addEventListener('input', ()=>{
+    const MAX_BYTES = 80;
+    const buffer = (0, _buffer.Buffer).from($dom.sendOpReturn.value, 'utf8');
+    const bytesRemaining = MAX_BYTES - buffer.length;
+    const isValid = bytesRemaining >= 0;
+    if (isValid) {
+        $dom.sendOpReturn.classList.remove('is-invalid');
+        $dom.sendFormBtn.disabled = false;
+    } else {
+        $dom.sendOpReturn.classList.add('is-invalid');
+        $dom.sendFormBtn.disabled = true;
+    }
+    calcAmountSpent();
+});
 window.navigateSend = ()=>{
     (0, _utils.hide)($dom.welcome, $dom.dashboard, $dom.myAddresses, $dom.newAddress, $dom.transactions, $dom.setPassword, $dom.mobileMenu);
     (0, _utils.show)($dom.main, $dom.send);
     sendFormInit();
 };
 
-},{"bitcoinjs-lib":"5LQXv","ecpair":"2gbSb","@bitcoinerlab/secp256k1":"13Dgd","satoshi-bitcoin":"cxMaM","../utils":"khuqI","../app":"2R06K","../api":"38UJz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"90uMK":[function(require,module,exports,__globalThis) {
+},{"bitcoinjs-lib":"5LQXv","ecpair":"2gbSb","@bitcoinerlab/secp256k1":"13Dgd","satoshi-bitcoin":"cxMaM","buffer":"bCaf4","../utils":"khuqI","../app":"2R06K","../api":"38UJz","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"90uMK":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _datatablesNetBs5 = require("datatables.net-bs5");
 var _datatablesNetBs5Default = parcelHelpers.interopDefault(_datatablesNetBs5);
@@ -51025,7 +51092,7 @@ const transactionsTable = new (0, _datatablesNetBs5Default.default)($dom.transac
         },
         {
             data: 'tx_id',
-            render: (data)=>`<a class="btn btn-warning btn-sm d-inline-flex" target="_blank" href="https://bgl.bitaps.com/${data}"><i class="fa-solid fa-binoculars mt-1"></i><span class="hidden-sr ms-1">Explorer</span></a>`,
+            render: (data)=>`<a class="btn btn-outline-secondary btn-sm d-inline-flex" target="_blank" href="https://bgl.bitaps.com/${data}"><i class="fa-solid fa-binoculars mt-1"></i><span class="hidden-sr ms-1">Explorer</span></a>`,
             className: 'd-flex justify-content-end'
         }
     ],
@@ -51294,4 +51361,4 @@ window.navigateLogin = ()=>{
 
 },{"aes4js":"feHmG","../utils":"khuqI","../app":"2R06K","../twa":"lrhWl","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["a0t4e"], "a0t4e", "parcelRequiredbf4", {})
 
-//# sourceMappingURL=bitgesell-wallet.800893d8.js.map
+//# sourceMappingURL=bitgesell-wallet.200f3e5d.js.map
